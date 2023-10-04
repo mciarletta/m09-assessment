@@ -51,18 +51,18 @@ public class ReviewJdbcTemplateRepository implements ReviewRepository {
     public boolean update(Review review) {
         String sql = """
                 update review set
-                    game_id = ?,
-                    title = ?,
-                    rating = ?,
-                    review_body = ?,
-                    date_posted = ?,
-                    contributor = ?
+                game_id = ?,
+                title = ?,
+                rating = ?,
+                review_body = ?,
+                date_posted = ?,
+                contributor = ?
                 where review_id = ?;
                 """;
 
         return jdbcTemplate.update(sql,
                 review.getGame_id(), review.getTitle(), review.getRating(),
-                review.getReviewBody(), review.getReviewBody(), review.getDatePosted(), review.getContributor()
+                review.getReviewBody(), review.getDatePosted(), review.getContributor(), review.getId()
         ) > 0;
 
     }

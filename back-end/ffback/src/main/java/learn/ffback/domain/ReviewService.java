@@ -15,9 +15,12 @@ import java.util.Set;
 public class ReviewService {
 
     private final ReviewRepository repository;
+    private final Validator validator;
 
-    public ReviewService(ReviewRepository repository) {
+
+    public ReviewService(ReviewRepository repository, Validator validator) {
         this.repository = repository;
+        this.validator = validator;
     }
 
     public List<Review> findReviewsByGameId(int gameId){
@@ -76,9 +79,6 @@ public class ReviewService {
             result.addErrorMessage("Review cannot be null.");
             return result;
         }
-        //should inject in the constructor instead
-        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        Validator validator = factory.getValidator();
 
         Set<ConstraintViolation<Review>> violations = validator.validate(review);
 
