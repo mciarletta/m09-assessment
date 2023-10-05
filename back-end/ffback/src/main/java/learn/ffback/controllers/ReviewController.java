@@ -16,6 +16,8 @@ import static learn.ffback.controllers.ResultToResponseEntity.toResponseEntity;
 
 //make this a RestController
 @RestController
+@CrossOrigin(origins = {"http://localhost:3000"})
+
 //add a path
 @RequestMapping("/api/review")
 public class ReviewController {
