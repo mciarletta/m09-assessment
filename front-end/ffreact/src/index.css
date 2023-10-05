@@ -31,3 +31,15 @@ code {
   color: white;
 }
 
+.accordion {
+	--bs-accordion-border-color: grey;
+  --bs-accordion-btn-color: rgb(228, 215, 215);
+	--bs-accordion-btn-bg: rgb(22, 21, 21);
+	--bs-accordion-color: rgb(194, 194, 202);
+  --bs-accordion-bg: rgb(29, 29, 32);
+
+	--bs-accordion-active-bg: rgb(19, 17, 17);
+  --bs-accordion-active-color: rgb(221, 211, 211);
+
+}
+

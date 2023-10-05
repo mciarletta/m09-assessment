@@ -7,7 +7,7 @@ export default function GameChars({ chars }) {
       <Row xs={1} md={2} lg={3} xl={4}>
         {chars.map((char) => (
           <Col key={char.id} className="my-2">
-            <Card>
+            <Card bg={'dark'}>
               <Row>
                 <Col>
                   <Card.Img
@@ -18,18 +18,18 @@ export default function GameChars({ chars }) {
                 </Col>
 
                 <Col xs={8}  className="m-2">
-                  <Accordion flush>
+                  <Accordion>
                     <Accordion.Item eventKey="0">
                       <Accordion.Header>Stats</Accordion.Header>
                       <Accordion.Body>
-                        <ListGroup className="list-group-flush">
-                          <ListGroup.Item>Age: {char.age}</ListGroup.Item>
-                          <ListGroup.Item>Gender: {char.gender}</ListGroup.Item>
-                          <ListGroup.Item>Race: {char.race}</ListGroup.Item>
-                          <ListGroup.Item>Job: {char.job}</ListGroup.Item>
-                          <ListGroup.Item>Height: {char.height}</ListGroup.Item>
-                          <ListGroup.Item>Weight: {char.weight}</ListGroup.Item>
-                        </ListGroup>
+                        <ui className="list-group-flush">
+                          <li>Age: {char.age}</li>
+                          <li>Gender: {char.gender}</li>
+                          <li>Race: {char.race}</li>
+                          <li>Job: {char.job}</li>
+                          <li>Height: {char.height}</li>
+                          <li>Weight: {char.weight}</li>
+                        </ui>
                       </Accordion.Body>
                     </Accordion.Item>
                   </Accordion>
