@@ -5,6 +5,8 @@
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #161616;
+  color: #919191;
 }
 
 code {
@@ -14,10 +16,18 @@ code {
 
 
 
+
+
 @font-face {font-family:"Final Fantasy 3/6 Font Regular";src:url("./assets/fonts/final_fantasy_36_font.eot") format("eot"),url("./assets/fonts/final_fantasy_36_font.woff") format("woff"),url("./assets/fonts/final_fantasy_36_font.ttf") format("truetype"),url("./assets/fonts/final_fantasy_36_font.svg#Final-Fantasy-3/6-Font") format("svg");font-weight:normal;font-style:normal;}
 
 .navbar {
     font-family: 'Final Fantasy 3/6 Font Regular';
     font-size: xx-large;
-
+    background-color: #034294;
 }
+
+.navbar .nav-link,
+.navbar .dropdown-toggle {
+  color: white;
+}
+

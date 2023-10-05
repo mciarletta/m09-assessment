@@ -1,21 +1,15 @@
 import { Link } from "react-router-dom";
-import { Container, Nav, Navbar,NavDropdown } from "react-bootstrap";
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import Mog from "../assets/photos/mogicon.png";
 
 
 
 function Navigation({ view, setView }) {
   return (
-    <Navbar
-      style={{
-        backgroundColor: "#034294",
-      }}
-      expand="lg"
-    >
-      <Container>
+    <Navbar>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="container d-flex justify-content-between">
+          <Nav className="w-100 px-4 d-flex justify-content-between">
             <div className="d-lg-flex">
               <NavDropdown title="Games">
                 <NavDropdown.Item as={Link} to="/game/1">
@@ -54,7 +48,6 @@ function Navigation({ view, setView }) {
             </div>
           </Nav>
         </Navbar.Collapse>
-      </Container>
     </Navbar>
   );
 }
