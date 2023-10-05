@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+    font-family: 'Final Fantasy 3/6 Font';
+    src: url('%PUBLIC_URL%/final_fantasy_36_font.ttf') format('truetype');
+}
+
+body, .navbar {
+    font-family: 'Final Fantasy 3/6 Font', regular;
+}

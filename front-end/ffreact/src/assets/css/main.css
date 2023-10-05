@@ -1,0 +1,7 @@
+@font-face {
+    font-family: 'Final Fantasy 3/6 Font';
+    src: url('../fonts/final_fantasy_36_font.ttf') format('truetype');
+}
+.navbar {
+    font-family: 'Final Fantasy 3/6 Font';
+}
