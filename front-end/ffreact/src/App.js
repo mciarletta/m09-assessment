@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+
 
 import AboutUs from "./components/AboutUs";
 import GamePage from "./components/GamePage";
