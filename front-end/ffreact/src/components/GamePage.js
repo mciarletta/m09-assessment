@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 import Review from "./Review";
 import GameInfo from "./GameInfo";
+import GameChars from "./GameChars";
 import { Container, Spinner } from "react-bootstrap";
 
 //function to grab the API id information
@@ -30,6 +31,10 @@ function getApiId(titleNumber) {
   return apiId;
 }
 
+const loadingSpinner = (<Spinner animation="border" role="status">
+<span className="visually-hidden">Loading...</span>
+</Spinner>);
+
 export default function GamePage() {
   //get the title number from the params in the url, currently 1-6
   const { id } = useParams();
@@ -37,8 +42,12 @@ export default function GamePage() {
   //a state to update the page when the game changes
   const [game, setGame] = useState([]);
   const [review, setReview] = useState([]);
+  const [chars, setChars] = useState([]);
+
   const [loading, setLoading] = useState(false);
   const [loadingReviews, setLoadingReviews] = useState(false);
+  const [loadingchars, setLoadingchars] = useState(false);
+
 
 
   //grab the information for the update form using the ffTitleNumber params as a useEffect trigger
@@ -119,14 +128,49 @@ export default function GamePage() {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (id) {
+      async function getReview() {
+        setLoadingchars(true);
+
+        try {
+          const response = await fetch(
+            `https://www.moogleapi.com/api/v1/characters/search?origin=${id}`
+          );
+
+          const data = await response.json();
+
+          if (response.status === 200) {
+            setChars(data);
+            setLoadingchars(false);
+        } else if (response.status === 404) {
+            console.log(data);
+            //navigate("/Notfound");
+          } else {
+            return Promise.reject(
+              new Error(`Unexpected status code ${response.status}`)
+            );
+          }
+        } catch (e) {
+          console.log(e);
+          setLoadingchars(false);
+
+          //   if (e.length) {
+          //     setErrors(e);
+          //   } else {
+          //     setErrors([e]);
+          //   }
+        }
+      }
+      getReview();
+    }
+  }, [id]);
+
   return (
     <Container>
-      {loading ? (<Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>) : <GameInfo game={game} />}
-      {loadingReviews ? (<Spinner animation="border" role="status">
-      <span className="visually-hidden">Loading...</span>
-    </Spinner>) : <Review review={review} />}
+      {loading ? (loadingSpinner) : <GameInfo game={game} />}
+      {loadingReviews ? (loadingSpinner) : <Review review={review} />}
+      {loadingchars ? (loadingSpinner) : <GameChars chars={chars} />}
     </Container>
   );
 }
