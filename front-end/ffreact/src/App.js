@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import { useState } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import AboutUs from "./components/AboutUs";
+import GamePage from "./components/GamePage";
+import Landing from "./components/Landing";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+
+
+function NotFound() {
+  return <div>Page Not Found</div>;
+}
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Nav />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/game/:id" element={<GamePage />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+      <Footer />
+    </Router>
   );
 }
 
