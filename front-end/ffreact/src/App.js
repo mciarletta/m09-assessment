@@ -8,11 +8,9 @@ import GamePage from "./components/GamePage";
 import Landing from "./components/Landing";
 import Nav from "./components/Nav";
 import Footer from "./components/Footer";
+import NotFound from "./components/NotFound";
 
 
-function NotFound() {
-  return <div>Page Not Found</div>;
-}
 
 
 function App() {

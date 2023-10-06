@@ -15,6 +15,7 @@ import {
   NavItem,
 } from "react-bootstrap";
 
+
 //function to grab the API id information
 function getApiId(titleNumber) {
   let apiId;

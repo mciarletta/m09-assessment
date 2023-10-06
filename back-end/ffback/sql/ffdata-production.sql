@@ -12,6 +12,17 @@ create table review (
     contributor varchar(255) not null
 );
 
+create table users (
+    user_id int primary key auto_increment,
+    user_name varchar(255) not null,
+    user_password varchar(255) not null
+);
+
+insert into users (user_name, user_password)
+values 
+('Sawyer', 'Cele$'),
+('Matt', 'Ryd!a');
+
 insert into review (game_id, title, rating, review_body, date_posted, contributor)
 values
 ('4', 'Final Fantasy 4', '9.2', 
@@ -23,4 +34,9 @@ The gameplay is a highlight, introducing the Active Time Battle (ATB) system tha
 More than just a game, Final Fantasy IV is an immersive odyssey through a meticulously crafted fantasy world. As the characters grow, so does the emotional investment of the player. The games climax is not merely a conclusion to a quest but a profound, emotional experience that lingers in memory.
 In the pantheon of Final Fantasy titles, IV stands tall as a timeless classic. It proves that even in the pixelated realms of 16-bit graphics, a gripping tale of heroism and sacrifice can unfold. Whether youre a seasoned RPG enthusiast or a newcomer to the genre, Final Fantasy IV for the SNES offers a journey that transcends the boundaries of its time, leaving an everlasting impression of adventure, camaraderie, and the enduring power of storytelling in video games.',
 '2023-10-04',
-'Matt')
+'Matt');
+
+select user_id, user_name, user_password
+from users
+where user_name = 'Matt' 
+and user_password = 'Ryd!a';

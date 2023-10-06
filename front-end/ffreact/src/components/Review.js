@@ -4,12 +4,13 @@ import { useState } from "react";
 
 export default function Review({ review }) {
   const [show, setShow] = useState(false);
+ const [delId, setDelId] = useState(null);
 
   function handleInfo() {
     setShow(true);
   }
 
-  function handleClose() {
+  function handleClose() { 
     setShow(false);
   }
 
@@ -18,6 +19,7 @@ export default function Review({ review }) {
       {show ? (
         <LogInModal
         handleClose={handleClose}
+        deleteId={delId}
         show={show}
         />
       ) : null}
@@ -52,7 +54,10 @@ export default function Review({ review }) {
                       variant="outline-danger"
                       size="sm"
                       style={{ height: "2rem" }}
-                      onClick={handleInfo}
+                      onClick={() => {
+                        setDelId(rev.id);
+                        handleInfo();
+                      }}
                     >
                       Delete Review
                     </Button>
