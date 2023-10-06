@@ -1,13 +1,17 @@
 import { Card, Row, Col, ListGroup, Accordion, Container } from "react-bootstrap";
 
 export default function GameChars({ chars }) {
+    if (chars.message){
+        return null;
+
+    } else {
   return (
-    <div className="border border-5 border-rounded-5">
+    <div className="border border-5 border-rounded-5 border-secondary shadow-sm">
       <h1>Characters:</h1>
       <Row xs={1} md={2} lg={3} xl={4}>
         {chars.map((char) => (
           <Col key={char.id} className="my-2">
-            <Card bg={'dark'}>
+            <Card bg={'dark'} >
               <Row>
                 <Col>
                   <Card.Img
@@ -37,8 +41,8 @@ export default function GameChars({ chars }) {
               </Row>
 
               <Card.Body>
-                <Card.Title>{char.name}</Card.Title>
-                <Accordion flush>
+                <Card.Title className="text-light">{char.name}</Card.Title>
+                <Accordion>
                   <Accordion.Item eventKey="0">
                     <Accordion.Header>Description</Accordion.Header>
                     <Accordion.Body>{char.description}</Accordion.Body>
@@ -51,4 +55,5 @@ export default function GameChars({ chars }) {
       </Row>
     </div>
   );
+}
 }

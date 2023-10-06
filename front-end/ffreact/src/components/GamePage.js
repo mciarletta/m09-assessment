@@ -1,9 +1,19 @@
 import { useParams } from "react-router";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Review from "./Review";
 import GameInfo from "./GameInfo";
 import GameChars from "./GameChars";
-import { Container, Spinner } from "react-bootstrap";
+import Screenshots from "./Screenshots";
+import {
+  Col,
+  Container,
+  Row,
+  Spinner,
+  NavLink,
+  Button,
+  Collapse,
+  NavItem,
+} from "react-bootstrap";
 
 //function to grab the API id information
 function getApiId(titleNumber) {
@@ -27,15 +37,26 @@ function getApiId(titleNumber) {
     case "6":
       apiId = "7eb670e8-86bd-4622-399e-08d6b0a627a3";
       break;
+    default:
+      apiId = "";
   }
   return apiId;
 }
 
-const loadingSpinner = (<Spinner animation="border" role="status">
-<span className="visually-hidden">Loading...</span>
-</Spinner>);
+const loadingSpinner = (
+  <Spinner animation="border" role="status">
+    <span className="visually-hidden">Loading...</span>
+  </Spinner>
+);
 
 export default function GamePage() {
+  //for the side nav
+  const descriptionRef = useRef(null);
+  const characterRef = useRef(null);
+  const reviewRef = useRef(null);
+  const screensRef = useRef(null);
+  const [open, setOpen] = useState(true);
+
   //get the title number from the params in the url, currently 1-6
   const { id } = useParams();
 
@@ -47,8 +68,6 @@ export default function GamePage() {
   const [loading, setLoading] = useState(false);
   const [loadingReviews, setLoadingReviews] = useState(false);
   const [loadingchars, setLoadingchars] = useState(false);
-
-
 
   //grab the information for the update form using the ffTitleNumber params as a useEffect trigger
   useEffect(() => {
@@ -67,9 +86,8 @@ export default function GamePage() {
           if (response.status === 200) {
             setGame(data);
             setLoading(false);
-        } else if (response.status === 404) {
+          } else if (response.status === 404) {
             console.log(data);
-            //navigate("/Notfound");
           } else {
             return Promise.reject(
               new Error(`Unexpected status code ${response.status}`)
@@ -78,12 +96,6 @@ export default function GamePage() {
         } catch (e) {
           console.log(e);
           setLoading(false);
-
-          //   if (e.length) {
-          //     setErrors(e);
-          //   } else {
-          //     setErrors([e]);
-          //   }
         }
       }
       getGame();
@@ -105,9 +117,8 @@ export default function GamePage() {
           if (response.status === 200) {
             setReview(data);
             setLoadingReviews(false);
-        } else if (response.status === 404) {
+          } else if (response.status === 404) {
             console.log(data);
-            //navigate("/Notfound");
           } else {
             return Promise.reject(
               new Error(`Unexpected status code ${response.status}`)
@@ -116,12 +127,6 @@ export default function GamePage() {
         } catch (e) {
           console.log(e);
           setLoadingReviews(false);
-
-          //   if (e.length) {
-          //     setErrors(e);
-          //   } else {
-          //     setErrors([e]);
-          //   }
         }
       }
       getReview();
@@ -143,9 +148,8 @@ export default function GamePage() {
           if (response.status === 200) {
             setChars(data);
             setLoadingchars(false);
-        } else if (response.status === 404) {
+          } else if (response.status === 404) {
             console.log(data);
-            //navigate("/Notfound");
           } else {
             return Promise.reject(
               new Error(`Unexpected status code ${response.status}`)
@@ -154,23 +158,72 @@ export default function GamePage() {
         } catch (e) {
           console.log(e);
           setLoadingchars(false);
-
-          //   if (e.length) {
-          //     setErrors(e);
-          //   } else {
-          //     setErrors([e]);
-          //   }
         }
       }
       getReview();
     }
   }, [id]);
 
+  const goToDesc = () => {
+    descriptionRef.current.scrollIntoView();
+  };
+
+  const goToCchars = () => {
+    characterRef.current.scrollIntoView();
+  };
+
+  const goToRevies = () => {
+    reviewRef.current.scrollIntoView();
+  };
+
+  const gotToScreens = () => {
+    screensRef.current.scrollIntoView();
+  };
   return (
-    <Container>
-      {loading ? (loadingSpinner) : <GameInfo game={game} />}
-      {loadingReviews ? (loadingSpinner) : <Review review={review} />}
-      {loadingchars ? (loadingSpinner) : <GameChars chars={chars} />}
-    </Container>
+    <>
+      <Container fluid="xxl">
+        <Row>
+          <Col>
+            <div ref={descriptionRef}></div>
+            {loading ? loadingSpinner : <GameInfo game={game} />}
+            <div ref={reviewRef}></div>
+
+            {loadingReviews ? loadingSpinner : <Review review={review} />}
+            <div ref={characterRef}></div>
+
+            {loadingchars ? loadingSpinner : <GameChars chars={chars} />}
+            <div ref={screensRef}></div>
+
+            <Screenshots gameId={id} />
+          </Col>
+
+          <Col className="col-auto pr-3">
+            <div className="position-sticky top-50 end-0 p-0">
+              <Row className=" px-0">
+                <Col>
+                  <Button
+                    className="translate-middle-y"
+                    variant="outline-primary"
+                    onClick={() => setOpen(!open)}
+                    aria-controls="example-collapse-text"
+                    aria-expanded={open}
+                  >
+                    {open ? ">" : "<"}
+                  </Button>
+                  <Collapse in={open} dimension="width">
+                    <NavItem>
+                      <NavLink onClick={goToDesc}>Description</NavLink>
+                      <NavLink onClick={goToRevies}>Reviews</NavLink>
+                      <NavLink onClick={goToCchars}>Characters</NavLink>
+                      <NavLink onClick={gotToScreens}>Screenshots</NavLink>
+                    </NavItem>
+                  </Collapse>
+                </Col>
+              </Row>
+            </div>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
