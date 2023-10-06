@@ -36,6 +36,12 @@ function Navigation({ view, setView }) {
               </Nav.Link>
             </div>
 
+            <div className="title" style={{
+            letterSpacing: "30px",
+            color: "white"}}>
+              FINAL FANTASY REACT
+            </div>
+
             <div>
               <Navbar.Brand as={Link} to="/">
                 <img
