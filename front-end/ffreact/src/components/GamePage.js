@@ -1,4 +1,4 @@
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useState, useEffect, useRef } from "react";
 import Review from "./Review";
 import GameInfo from "./GameInfo";
@@ -70,9 +70,16 @@ export default function GamePage() {
   const [loadingReviews, setLoadingReviews] = useState(false);
   const [loadingchars, setLoadingchars] = useState(false);
 
+  //set up a navigate 
+  const navigate = useNavigate();
+
   //grab the information for the update form using the ffTitleNumber params as a useEffect trigger
   useEffect(() => {
     if (id) {
+      if (id > 6 || id < 1){
+        navigate("/notfound");
+        return;
+      }
       let gameId = getApiId(id);
 
       async function getGame() {
