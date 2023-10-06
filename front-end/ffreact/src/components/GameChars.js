@@ -6,9 +6,9 @@ export default function GameChars({ chars }) {
 
     } else {
   return (
-    <div className="border border-5 border-rounded-5 border-secondary shadow-sm">
+    <div className="border border-5 border-rounded-5 border-secondary shadow-sm p-2">
       <h1>Characters:</h1>
-      <Row xs={1} md={2} lg={3} xl={4}>
+      <Row xs={1} md={2} lg={3} xl={4} >
         {chars.map((char) => (
           <Col key={char.id} className="my-2">
             <Card bg={'dark'} >

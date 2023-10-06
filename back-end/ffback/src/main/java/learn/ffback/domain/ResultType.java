@@ -1,6 +1,6 @@
 package learn.ffback.domain;
 
-public enum ReviewResultType {
+public enum ResultType {
     SUCCESS,
     INVALID,
     NOT_FOUND

@@ -2,7 +2,7 @@ import { Carousel } from "react-bootstrap";
 
 export default function Screenshots({ gameId }) {
   return (
-    <div className="border border-5 border-rounded-5 border-secondary shadow-sm">
+    <div className="border border-5 border-rounded-5 border-secondary shadow-sm p-2">
     <h1>Screenshots:</h1>
     <Carousel data-bs-theme="dark">
       <Carousel.Item>

@@ -1,16 +1,14 @@
 package learn.ffback.domain;
 
-import learn.ffback.models.Review;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReviewResult {
+public class Result <T> {
     private final ArrayList<String> messages = new ArrayList<>();
-    private Review review;
+    private T payload;
 
     //set the result type
-    private ReviewResultType type = ReviewResultType.SUCCESS;
+    private ResultType type = ResultType.SUCCESS;
 
     public List<String> getErrorMessages() {
         return new ArrayList<>(messages);
@@ -18,14 +16,14 @@ public class ReviewResult {
 
     public void addErrorMessage(String message) {
         //set the type to invalid
-        this.type = ReviewResultType.INVALID;
+        this.type = ResultType.INVALID;
         messages.add(message);
     }
 
     public void addErrorMessage(String format, Object... args) {
         messages.add(String.format(format, args));
         //set the type to invalid
-        this.type = ReviewResultType.INVALID;
+        this.type = ResultType.INVALID;
     }
 
     /**
@@ -33,23 +31,23 @@ public class ReviewResult {
      * ends up with nothing
      */
     public void setNotFound(){
-        this.type = ReviewResultType.NOT_FOUND;
+        this.type = ResultType.NOT_FOUND;
     }
 
-    public ReviewResultType getType() {
+    public ResultType getType() {
         return type;
     }
 
     public boolean isSuccess() {
         // If an error message exists, the operation failed.
-        return type == ReviewResultType.SUCCESS;
+        return type == ResultType.SUCCESS;
     }
 
-    public Review getReview() {
-        return review;
+    public T getPayload() {
+        return payload;
     }
 
-    public void setReview(Review review) {
-        this.review = review;
+    public void setPayload(T payload) {
+        this.payload = payload;
     }
 }

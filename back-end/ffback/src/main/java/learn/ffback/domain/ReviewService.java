@@ -1,9 +1,7 @@
 package learn.ffback.domain;
 
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validation;
 import jakarta.validation.Validator;
-import jakarta.validation.ValidatorFactory;
 import learn.ffback.data.ReviewRepository;
 import learn.ffback.models.Review;
 import org.springframework.stereotype.Service;
@@ -27,8 +25,8 @@ public class ReviewService {
         return repository.findAllByGameId(gameId);
     }
 
-    public ReviewResult create(Review review) {
-        ReviewResult result = validate(review);
+    public Result<Review> create(Review review) {
+        Result<Review> result = validate(review);
 
         if (review != null && review.getId() > 0) {
             result.addErrorMessage("Review `id` should not be set.");
@@ -36,14 +34,14 @@ public class ReviewService {
 
         if (result.isSuccess()) {
             review = repository.create(review);
-            result.setReview(review);
+            result.setPayload(review);
         }
 
         return result;
     }
 
-    public ReviewResult update(Review review) {
-        ReviewResult result = validate(review);
+    public Result<Review> update(Review review) {
+        Result<Review> result = validate(review);
 
         if (review != null && review.getId() <= 0) {
             result.addErrorMessage("SolarPanel `id` should be set.");
@@ -61,8 +59,8 @@ public class ReviewService {
         return result;
     }
 
-    public ReviewResult deleteById(int id) {
-        ReviewResult result = new ReviewResult();
+    public Result<Review> deleteById(int id) {
+        Result<Review> result = new Result<Review>();
         boolean success = repository.deleteById(id);
         if (!success) {
             result.addErrorMessage(String.format("Could not delete panel id %s.", id));
@@ -72,8 +70,8 @@ public class ReviewService {
         return result;
     }
 
-    private ReviewResult validate(Review review) {
-        ReviewResult result = new ReviewResult();
+    private Result<Review> validate(Review review) {
+        Result<Review> result = new Result<Review>();
 
         if (review == null){
             result.addErrorMessage("Review cannot be null.");

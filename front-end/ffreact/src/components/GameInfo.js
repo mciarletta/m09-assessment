@@ -9,7 +9,7 @@ export default function GameInfo({ game }) {
         </Col>
       </Row>
 
-      <Row md={2}>
+      <Row md={2} className="p-2">
         <Col md={5}>
           <div>
             <img className="img-fluid" src={game.map((game) => game.picture)} />

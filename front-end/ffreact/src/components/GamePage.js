@@ -213,9 +213,9 @@ export default function GamePage() {
                   <Collapse in={open} dimension="width">
                     <NavItem>
                       <NavLink className="sideNav" onClick={goToDesc}>Description</NavLink>
-                      <NavLink onClick={goToRevies}>Reviews</NavLink>
-                      <NavLink onClick={goToCchars}>Characters</NavLink>
-                      <NavLink onClick={gotToScreens}>Screenshots</NavLink>
+                      <NavLink className="sideNav" onClick={goToRevies}>Reviews</NavLink>
+                      <NavLink className="sideNav" onClick={goToCchars}>Characters</NavLink>
+                      <NavLink className="sideNav" onClick={gotToScreens}>Screenshots</NavLink>
                     </NavItem>
                   </Collapse>
                 </Col>

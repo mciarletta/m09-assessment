@@ -1,7 +1,7 @@
 package learn.ffback.controllers;
 
 import jakarta.validation.Valid;
-import learn.ffback.domain.ReviewResult;
+import learn.ffback.domain.Result;
 import learn.ffback.domain.ReviewService;
 import learn.ffback.models.Review;
 import org.springframework.http.HttpStatus;
@@ -46,7 +46,7 @@ public class ReviewController {
             return new ResponseEntity<>(result.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
 
-        ReviewResult resultNew = reviewService.create(review);
+        Result resultNew = reviewService.create(review);
         return toResponseEntity(resultNew, HttpStatus.CREATED);
     }
 
@@ -59,7 +59,7 @@ public class ReviewController {
         if (reviewId != review.getId()){
             return new ResponseEntity<>(HttpStatus.CONFLICT);
         }
-        ReviewResult result = reviewService.update(review);
+        Result result = reviewService.update(review);
         //the toResponseEntity checks these failure scenarios: valid, bad request 400 (like object is banjaxed) and not found 404 the id doesn't exist.
         return toResponseEntity(result, HttpStatus.NO_CONTENT);
     }
@@ -68,7 +68,7 @@ public class ReviewController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deletePanel(@PathVariable int id){
-        ReviewResult result = reviewService.deleteById(id);
+        Result result = reviewService.deleteById(id);
         return toResponseEntity(result, HttpStatus.NO_CONTENT);
     }
 
