@@ -212,7 +212,7 @@ export default function GamePage() {
                   </Button>
                   <Collapse in={open} dimension="width">
                     <NavItem>
-                      <NavLink onClick={goToDesc}>Description</NavLink>
+                      <NavLink className="sideNav" onClick={goToDesc}>Description</NavLink>
                       <NavLink onClick={goToRevies}>Reviews</NavLink>
                       <NavLink onClick={goToCchars}>Characters</NavLink>
                       <NavLink onClick={gotToScreens}>Screenshots</NavLink>
