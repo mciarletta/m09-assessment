@@ -36,7 +36,7 @@ export default function Review({ review }) {
           </Col>
         </Row>
 
-        <Row md={1} lg={2}>
+        <Row xs={1} lg={2}>
           {review.map((rev) => (
             <Col className="my-2" key={rev.id}>
               <div className="border-top border-bottom border-3 border-secondary">
@@ -46,10 +46,10 @@ export default function Review({ review }) {
                 <h6>Contributor: {rev.contributor} </h6>
 
                 <Row className="d-flex justify-content-start">
-                  <Col xs={8} className="d-flex">
+                  <Col xs={6} className="d-flex">
                     <h6>Posted: {rev.datePosted}</h6>
                   </Col>
-                  <Col xs={4} className="d-flex justify-content-end pb-2">
+                  <Col xs={6} className="d-flex justify-content-end pb-2">
                     <Button
                       variant="outline-danger"
                       size="sm"
