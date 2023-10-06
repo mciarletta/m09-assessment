@@ -26,14 +26,14 @@ export default function GameChars({ chars }) {
                     <Accordion.Item eventKey="0">
                       <Accordion.Header>Stats</Accordion.Header>
                       <Accordion.Body>
-                        <ui className="list-group-flush">
+                        <ul className="list-group-flush">
                           <li>Age: {char.age}</li>
                           <li>Gender: {char.gender}</li>
                           <li>Race: {char.race}</li>
                           <li>Job: {char.job}</li>
                           <li>Height: {char.height}</li>
                           <li>Weight: {char.weight}</li>
-                        </ui>
+                        </ul>
                       </Accordion.Body>
                     </Accordion.Item>
                   </Accordion>

@@ -28,8 +28,6 @@ public class UserController {
 
     @PostMapping("/login")
     public User verifyUser(@RequestBody User user){
-
-        System.out.println(user);
         return userService.findByNameAndPassword(user.getUserName(), user.getUserPassword());
 
     }
