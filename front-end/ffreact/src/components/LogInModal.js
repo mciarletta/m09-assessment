@@ -1,13 +1,12 @@
 import { Modal, Button, Form, Alert, Spinner } from "react-bootstrap";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import AddReview from "./AddReview";
 
 const INITIAL_USER = {
   userName: "",
   userPassword: "",
 };
-
-
 
 export default function LogInModal({ show, handleClose, deleteId }) {
   const [user, setUser] = useState(INITIAL_USER);
@@ -15,70 +14,77 @@ export default function LogInModal({ show, handleClose, deleteId }) {
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [add, setAdd] = useState(false);
+  const [contributor, setContributor] = useState(null);
 
   //get the location so after we add or delete, we can refresh the page and get the updates
   const navigate = useNavigate();
 
+  //get the title number from the params in the url, currently 1-6
+  const { id } = useParams();
+
   const SUCCESS = (
     <>
-    <Modal.Body>
-        <Alert variant="success">Review id: {deleteId} successfully deleted.</Alert>
-    </Modal.Body>
-    <Modal.Footer>
-    <Button size="sm" variant="success" onClick={handleHome}>
-      Home
-    </Button>
-    </Modal.Footer>
+      <Modal.Body>
+        <Alert variant="success">
+          Review id: {deleteId} successfully deleted.
+        </Alert>
+      </Modal.Body>
+      <Modal.Footer>
+        <Button size="sm" variant="success" onClick={handleHome}>
+          Home
+        </Button>
+      </Modal.Footer>
     </>
   );
 
-  function handleHome(){
+  function handleHome() {
     navigate("/");
   }
 
   const FORM = (
     <Form noValidate validated={validated} onSubmit={handleSubmit}>
-    <Modal.Body>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-        <Form.Label>Username</Form.Label>
-        <Form.Control
-          required
-          name="userName"
-          onChange={handleChange}
-          value={user.userName}
-          type="text"
-          placeholder="Username"
-          autoFocus
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="password">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          required
-          name="userPassword"
-          onChange={handleChange}
-          value={user.userPassword}
-          type="password"
-          placeholder="Password"
-        />
-      </Form.Group>
-    </Modal.Body>
-    {loading ? (
-      <Spinner animation="border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </Spinner>
-    ) : (
-      <Modal.Footer>
-        <Button size="sm" variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button type="submit" size="sm" variant="primary">
-          Verify {deleteId ? "and Delete" : "and Add"}
-        </Button>
-      </Modal.Footer>
-    )}
-  </Form>
-);
+      <Modal.Body>
+        <Form.Group className="mb-3" controlId="username">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            required
+            name="userName"
+            onChange={handleChange}
+            value={user.userName}
+            type="text"
+            placeholder="Username"
+            autoFocus
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="password">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            required
+            name="userPassword"
+            onChange={handleChange}
+            value={user.userPassword}
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+      </Modal.Body>
+      {loading ? (
+        <Spinner animation="border" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      ) : (
+        <Modal.Footer>
+          <Button size="sm" variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button type="submit" size="sm" variant="primary">
+            Verify {deleteId ? "and Delete" : "and Add"}
+          </Button>
+        </Modal.Footer>
+      )}
+    </Form>
+  );
 
   function handleChange(evt) {
     setUser((previous) => {
@@ -114,7 +120,13 @@ export default function LogInModal({ show, handleClose, deleteId }) {
 
           if (delRes) {
             setSuccess(true);
+
           }
+        } else {
+          //we are adding
+          setContributor(res.userName);
+          setAdd(true);
+
         }
       } else {
         setErrors(["Verification failed."]);
@@ -138,7 +150,8 @@ export default function LogInModal({ show, handleClose, deleteId }) {
       );
 
       if (response.status === 200) {
-        return true;
+        const data = response.json();
+        return data;
       } else if (response.status === 404) {
         return false;
       } else {
@@ -178,26 +191,44 @@ export default function LogInModal({ show, handleClose, deleteId }) {
     }
   }
 
+
+
   return (
-    <Modal
-      show={show}
-      onHide={handleClose}
-      backdrop="static"
-      keyboard={false}
-      className="text-light bg-dark"
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>Verify Credentials</Modal.Title>
-      </Modal.Header>
-        {success ? SUCCESS : FORM}
-      
-      {errors.length
-        ? errors.map((e) => (
-            <Alert variant="danger" key={e}>
-              {e}
-            </Alert>
-          ))
-        : null}
-    </Modal>
+    <>
+      {add ? (
+        <Modal
+          show={show}
+          onHide={handleClose}
+          
+          backdrop="static"
+          keyboard={false}
+          className="text-light bg-dark"
+        >
+          <AddReview id={id}
+          contributor={contributor} />
+        </Modal>
+      ) : (
+        <Modal
+          show={show}
+          onHide={handleClose}
+          backdrop="static"
+          keyboard={false}
+          className="text-light bg-dark"
+        >
+          <Modal.Header closeButton>
+            <Modal.Title>Verify Credentials</Modal.Title>
+          </Modal.Header>
+          {success ? SUCCESS : FORM}
+
+          {errors.length
+            ? errors.map((e) => (
+                <Alert variant="danger" key={e}>
+                  {e}
+                </Alert>
+              ))
+            : null}
+        </Modal>
+      )}
+    </>
   );
 }

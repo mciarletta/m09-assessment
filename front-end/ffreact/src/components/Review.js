@@ -30,7 +30,7 @@ export default function Review({ review }) {
             <h1>Reviews</h1>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button variant="primary" size="sm" style={{ height: "2rem" }}>
+            <Button onClick={handleInfo} variant="primary" size="sm" style={{ height: "2rem" }}>
               Add Review
             </Button>
           </Col>
