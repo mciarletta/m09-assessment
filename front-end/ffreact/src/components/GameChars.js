@@ -2,12 +2,32 @@ import { Card, Row, Col, ListGroup, Accordion, Container } from "react-bootstrap
 
 export default function GameChars({ chars }) {
     if (chars.message){
-        return null;
+        return (
+          <div className="border border-5 border-rounded-5 border-secondary shadow-sm p-2 my-2">
+      <Row >
+        <Col className="d-flex justify-content-center">
+          <h1>Characters</h1>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="d-flex justify-content-center">
+        <h6>No character information found.</h6>
+
+        </Col>
+      </Row>
+      </div>
+        );
 
     } else {
   return (
+    <>
     <div className="border border-5 border-rounded-5 border-secondary shadow-sm p-2">
-      <h1>Characters:</h1>
+      
+    <Row >
+        <Col className="d-flex justify-content-center">
+          <h1>Characters</h1>
+        </Col>
+      </Row>
       <Row xs={1} md={2} lg={3} xl={4} >
         {chars.map((char) => (
           <Col key={char.id} className="my-2">
@@ -54,6 +74,7 @@ export default function GameChars({ chars }) {
         ))}
       </Row>
     </div>
+    </>
   );
 }
 }

@@ -27,12 +27,12 @@ public class UserController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<User> verifyUser(@RequestBody User user){
+    public ResponseEntity<String> verifyUser(@RequestBody User user){
         User foundUser = userService.findByNameAndPassword(user.getUserName(), user.getUserPassword());
         if (foundUser == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return ResponseEntity.ok(foundUser);
+        return ResponseEntity.ok(foundUser.getUserName()+" verified.");
 
     }
 

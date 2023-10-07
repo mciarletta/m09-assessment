@@ -124,7 +124,7 @@ export default function LogInModal({ show, handleClose, deleteId }) {
           }
         } else {
           //we are adding
-          setContributor(res.userName);
+          setContributor(user.userName);
           setAdd(true);
 
         }
@@ -150,8 +150,7 @@ export default function LogInModal({ show, handleClose, deleteId }) {
       );
 
       if (response.status === 200) {
-        const data = response.json();
-        return data;
+        return true;
       } else if (response.status === 404) {
         return false;
       } else {

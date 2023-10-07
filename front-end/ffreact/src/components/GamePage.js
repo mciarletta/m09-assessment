@@ -125,8 +125,9 @@ export default function GamePage() {
           if (response.status === 200) {
             setReview(data);
             setLoadingReviews(false);
-          } else if (response.status === 404) {
+          } else if (response.staus === 404) {
             console.log(data);
+            setReview([]);
           } else {
             return Promise.reject(
               new Error(`Unexpected status code ${response.status}`)
@@ -134,6 +135,7 @@ export default function GamePage() {
           }
         } catch (e) {
           console.log(e);
+          setReview([]);
           setLoadingReviews(false);
         }
       }
