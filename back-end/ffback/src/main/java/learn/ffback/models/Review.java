@@ -15,8 +15,8 @@ public class Review {
     @NotBlank
     private String title;
     @NotNull
-    @Min(value = 0)
-    @Max(value = 10)
+   @DecimalMax(value = "10")
+    @DecimalMin(value = "0")
     private BigDecimal rating;
     @NotNull
     @NotBlank
