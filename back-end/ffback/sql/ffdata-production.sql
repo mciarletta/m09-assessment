@@ -6,7 +6,7 @@ create table review (
     review_id int primary key auto_increment,
     game_id int not null,
     title varchar(255) not null,
-	rating decimal(2, 1) not null,
+	rating decimal(3, 1) not null,
 	review_body text not null,
 	date_posted date not null,
     contributor varchar(255) not null
