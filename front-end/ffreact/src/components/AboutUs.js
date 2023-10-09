@@ -14,6 +14,7 @@ const teamInfo = {
       role: "Front End Fool",
       bio: "Sawyer enjoys socks, the NFL, and Pizza Hut.",
       profilePic: Yuffie,
+      rankedFFs: ["Final Fantasy VI", "Final Fantasy X", "Final Fantasy IX"],
       socialLinks: {
         github: "https://github.com/ghost-wolves",
         linkedin: "https://www.linkedin.com/in/sawyer-beaton/",
@@ -25,6 +26,7 @@ const teamInfo = {
       role: "Back End Baby",
       bio: "Matt has lived in every country in the world. He then decided to live in New Jersey.",
       profilePic: Rydia,
+      rankedFFs: ["Final Fantasy IV", "Final Fantasy VII", "Final Fantasy VI"],
       socialLinks: {
         github: "https://github.com/mciarletta/",
         linkedin: "https://www.linkedin.com/in/matthew-ciarletta-a7280721a/",
@@ -61,6 +63,16 @@ function AboutUs() {
                     {member.role}
                   </Card.Subtitle>
                   <Card.Text>{member.bio}</Card.Text>
+                  {member.rankedFFs && (
+                    <div>
+                      <strong>Top 3:</strong>
+                      <ol>
+                        {member.rankedFFs.map((game, index) => (
+                          <li key={index}>{game}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
                   <a
                     href={member.socialLinks.github}
                     target="_blank"
