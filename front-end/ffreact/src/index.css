@@ -31,6 +31,15 @@ code {
   color: white;
 }
 
+.NavDropdown {
+  background-color: black;
+}
+
+.teamTitle {
+  font-family: 'Final Fantasy 3/6 Font Regular';
+  color: white;
+}
+
 .accordion {
 	--bs-accordion-border-color: grey;
   --bs-accordion-btn-color: rgb(228, 215, 215);
