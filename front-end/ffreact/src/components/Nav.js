@@ -42,7 +42,7 @@ function Navigation() {
           </div>
 
           <div
-            className="title"
+            className="title d-lg-flex align-items-center"
             style={{
               letterSpacing: "30px",
               color: "white",
@@ -52,14 +52,18 @@ function Navigation() {
           </div>
 
           <div className="d-lg-flex align-items-center">
-            {!auth.user && <Nav.Link as={Link} to="/login">
-              Log In
-            </Nav.Link>}
+            {!auth.user && (
+              <Nav.Link as={Link} to="/login">
+                Log In
+              </Nav.Link>
+            )}
 
-            {auth.user && <Nav.Link onClick={auth.logout} as={Link} to="/">
-              Log Out
-            </Nav.Link>}
-            
+            {auth.user && (
+              <Nav.Link onClick={auth.logout} as={Link} to="/">
+                Log Out
+              </Nav.Link>
+            )}
+
             <Navbar.Brand className="ms-4" as={Link} to="/">
               <img src={Mog} alt="Mog Icon" height="30" width="30" />
             </Navbar.Brand>
