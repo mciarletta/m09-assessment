@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import AddReview from "./AddReview";
 import { useParams } from "react-router-dom";
+import DeleteModal from "./DeleteModal";
 
 export default function Review({ review }) {
   const [show, setShow] = useState(false);
@@ -35,7 +36,7 @@ export default function Review({ review }) {
         keyboard={false}
         className="text-light bg-dark"
       >
-        <AddReview id={id} contributor={contributor} />
+        (delId ? <DeleteModal deleteId={delId} /> : <AddReview id={id} contributor={contributor} />)
         </Modal>
       ) : null}
 
