@@ -70,10 +70,16 @@ export default function AddReview({ id, contributor }) {
   }
 
   async function doAdd() {
+    const jwtToken = localStorage.getItem("ffToken");
+      if (!jwtToken) {
+        return Promise.reject("Unauthorized.");
+      }
     const config = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + jwtToken,
+
       },
       body: JSON.stringify(review),
     };

@@ -2,30 +2,33 @@ import { Row, Col, Button } from "react-bootstrap";
 import LogInModal from "./LogInModal";
 import { useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
+import AddReview from "./AddReview";
+import { useParams } from "react-router-dom";
 
 export default function Review({ review }) {
   const [show, setShow] = useState(false);
- const [delId, setDelId] = useState(null);
+  const [delId, setDelId] = useState(null);
+  const [contributor, setContributor] = useState(null);
 
- //grab our auth contenxt
- const auth = useContext(AuthContext);
+    const { id } = useParams();
+
+
+
+  //grab our auth contenxt
+  const auth = useContext(AuthContext);
 
   function handleInfo() {
     setShow(true);
   }
 
-  function handleClose() { 
+  function handleClose() {
     setShow(false);
   }
 
   return (
     <>
       {show ? (
-        <LogInModal
-        handleClose={handleClose}
-        deleteId={delId}
-        show={show}
-        />
+        <AddReview handleClose={handleClose} id={id} contributor={contributor} show={show} />
       ) : null}
 
       <div className="border border-5 my-2 border-secondary p-2">
@@ -34,10 +37,19 @@ export default function Review({ review }) {
             <h1>Reviews</h1>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            {auth.user && <Button onClick={handleInfo} variant="primary" size="sm" style={{ height: "2rem" }}>
-              Add Review
-            </Button>}
-            
+          {auth.user && (
+                      <Button
+                      onClick={() => {
+                        handleInfo();
+                        setContributor(auth.user.username)
+                      }}
+                        variant="primary"
+                        size="sm"
+                        style={{ height: "2rem" }}
+                      >
+                        Add Review
+                      </Button>
+                    )}
           </Col>
         </Row>
 
@@ -55,17 +67,19 @@ export default function Review({ review }) {
                     <h6>Posted: {rev.datePosted}</h6>
                   </Col>
                   <Col xs={6} className="d-flex justify-content-end pb-2">
-                  {auth.user && <Button
-                      variant="outline-danger"
-                      size="sm"
-                      style={{ height: "2rem" }}
-                      onClick={() => {
-                        setDelId(rev.id);
-                        handleInfo();
-                      }}
-                    >
-                      Delete Review
-                    </Button>}
+                    {auth.user && (
+                      <Button
+                        variant="outline-danger"
+                        size="sm"
+                        style={{ height: "2rem" }}
+                        onClick={() => {
+                          setDelId(rev.id);
+                          handleInfo();
+                        }}
+                      >
+                        Delete Review
+                      </Button>
+                    )}
                     
                   </Col>
                 </Row>

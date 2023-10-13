@@ -42,49 +42,7 @@ export default function LogInModal({ show, handleClose, deleteId }) {
     navigate("/");
   }
 
-  const FORM = (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-      <Modal.Body>
-        <Form.Group className="mb-3" controlId="username">
-          <Form.Label>Username</Form.Label>
-          <Form.Control
-            required
-            name="userName"
-            onChange={handleChange}
-            value={user.userName}
-            type="text"
-            placeholder="Username"
-            autoFocus
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            required
-            name="userPassword"
-            onChange={handleChange}
-            value={user.userPassword}
-            type="password"
-            placeholder="Password"
-          />
-        </Form.Group>
-      </Modal.Body>
-      {loading ? (
-        <Spinner animation="border" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
-      ) : (
-        <Modal.Footer>
-          <Button size="sm" variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button type="submit" size="sm" variant="primary">
-            Verify {deleteId ? "and Delete" : "and Add"}
-          </Button>
-        </Modal.Footer>
-      )}
-    </Form>
-  );
+
 
   function handleChange(evt) {
     setUser((previous) => {
@@ -217,7 +175,7 @@ export default function LogInModal({ show, handleClose, deleteId }) {
           <Modal.Header closeButton>
             <Modal.Title>Verify Credentials</Modal.Title>
           </Modal.Header>
-          {success ? SUCCESS : FORM}
+          {success ? SUCCESS : SUCCESS}
 
           {errors.length
             ? errors.map((e) => (
