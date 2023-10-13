@@ -115,7 +115,7 @@ export default function LogInModal({ show, handleClose, deleteId }) {
         if (deleteId) {
           console.log(deleteId);
           setLoading(true);
-          const delRes = await deleteReivew();
+          const delRes = await deleteReview();
           setLoading(false);
 
           if (delRes) {
@@ -164,7 +164,7 @@ export default function LogInModal({ show, handleClose, deleteId }) {
     }
   }
 
-  async function deleteReivew() {
+  async function deleteReview() {
     try {
       const response = await fetch(
         `http://localhost:8080/api/review/delete/${deleteId}`,
@@ -198,7 +198,7 @@ export default function LogInModal({ show, handleClose, deleteId }) {
         <Modal
           show={show}
           onHide={handleClose}
-          
+
           backdrop="static"
           keyboard={false}
           className="text-light bg-dark"
