@@ -31,7 +31,6 @@ function App() {
   // NEW: Define a useEffect hook callback function to attempt
   // to restore the user's token from localStorage
   const resetUser = useCallback(() => {
-    console.log("refreshing")
     refreshToken()
       .then((user) => {
         setUser(user);
