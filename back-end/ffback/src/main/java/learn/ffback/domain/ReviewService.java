@@ -1,11 +1,11 @@
 package learn.ffback.domain;
 
-import jakarta.validation.ConstraintViolation;
-import jakarta.validation.Validator;
 import learn.ffback.data.ReviewRepository;
 import learn.ffback.models.Review;
 import org.springframework.stereotype.Service;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
 import java.util.List;
 import java.util.Set;
 

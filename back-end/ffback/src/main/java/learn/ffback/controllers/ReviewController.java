@@ -1,6 +1,5 @@
 package learn.ffback.controllers;
 
-import jakarta.validation.Valid;
 import learn.ffback.domain.Result;
 import learn.ffback.domain.ReviewService;
 import learn.ffback.models.Review;
@@ -9,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static learn.ffback.controllers.ResultToResponseEntity.toResponseEntity;
