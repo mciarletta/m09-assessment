@@ -1,5 +1,4 @@
-import { Row, Col, Button } from "react-bootstrap";
-import LogInModal from "./LogInModal";
+import { Row, Col, Button, Modal } from "react-bootstrap";
 import { useState, useContext } from "react";
 import AuthContext from "../context/AuthContext";
 import AddReview from "./AddReview";
@@ -28,7 +27,16 @@ export default function Review({ review }) {
   return (
     <>
       {show ? (
-        <AddReview handleClose={handleClose} id={id} contributor={contributor} show={show} />
+        <Modal
+        show={show}
+        onHide={handleClose}
+
+        backdrop="static"
+        keyboard={false}
+        className="text-light bg-dark"
+      >
+        <AddReview id={id} contributor={contributor} />
+        </Modal>
       ) : null}
 
       <div className="border border-5 my-2 border-secondary p-2">
