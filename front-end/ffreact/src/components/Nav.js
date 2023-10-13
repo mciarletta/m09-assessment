@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import Mog from "../assets/photos/mogicon.png";
+import { useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 
 
-function Navigation({ view, setView }) {
+function Navigation() {
+
+  const auth = useContext(AuthContext);
+
   return (
     <Navbar>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -47,9 +52,14 @@ function Navigation({ view, setView }) {
           </div>
 
           <div className="d-lg-flex align-items-center">
-            <Nav.Link as={Link} to="/login">
+            {!auth.user && <Nav.Link as={Link} to="/login">
               Log In
-            </Nav.Link>
+            </Nav.Link>}
+
+            {auth.user && <Nav.Link onClick={auth.logout} as={Link} to="/">
+              Log Out
+            </Nav.Link>}
+            
             <Navbar.Brand className="ms-4" as={Link} to="/">
               <img src={Mog} alt="Mog Icon" height="30" width="30" />
             </Navbar.Brand>

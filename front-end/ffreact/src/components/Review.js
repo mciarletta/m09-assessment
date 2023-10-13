@@ -1,10 +1,14 @@
 import { Row, Col, Button } from "react-bootstrap";
 import LogInModal from "./LogInModal";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import AuthContext from "../context/AuthContext";
 
 export default function Review({ review }) {
   const [show, setShow] = useState(false);
  const [delId, setDelId] = useState(null);
+
+ //grab our auth contenxt
+ const auth = useContext(AuthContext);
 
   function handleInfo() {
     setShow(true);
@@ -30,9 +34,10 @@ export default function Review({ review }) {
             <h1>Reviews</h1>
           </Col>
           <Col xs={4} className="d-flex justify-content-end">
-            <Button onClick={handleInfo} variant="primary" size="sm" style={{ height: "2rem" }}>
+            {auth.user && <Button onClick={handleInfo} variant="primary" size="sm" style={{ height: "2rem" }}>
               Add Review
-            </Button>
+            </Button>}
+            
           </Col>
         </Row>
 
@@ -50,7 +55,7 @@ export default function Review({ review }) {
                     <h6>Posted: {rev.datePosted}</h6>
                   </Col>
                   <Col xs={6} className="d-flex justify-content-end pb-2">
-                    <Button
+                  {auth.user && <Button
                       variant="outline-danger"
                       size="sm"
                       style={{ height: "2rem" }}
@@ -60,7 +65,8 @@ export default function Review({ review }) {
                       }}
                     >
                       Delete Review
-                    </Button>
+                    </Button>}
+                    
                   </Col>
                 </Row>
               </div>
